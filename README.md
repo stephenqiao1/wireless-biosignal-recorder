@@ -1,8 +1,5 @@
 # Wireless Bio-Signal Recorder & Test Bench  
 **Author:** Stephen Qiao  
-**Location:** Vancouver, Canada  
-**Timeline:** May 2025 – August 2025  
-
 ---
 
 ## 1. Executive Summary

@@ -4,8 +4,8 @@
 
 ## 1. Executive Summary
 - **Goal:** Brief description of the system (wireless PCB-based biosignal recorder, BLE streaming, Python test suite).  
-- **Key Deliverables:** PCB, ESP32 firmware, Python visualization/test bench, compliance-aware design.  
-- **Applications:** EMG/EEG-like bio-signal capture for research, prototyping, and test validation.  
+- **Key Deliverables:** PCB, ESP32 firmware, Python visualization/test bench.  
+- **Applications:** EEG-like bio-signal capture for research, prototyping, and test validation.  
 
 ---
 
@@ -13,10 +13,19 @@
 - **Block Diagram** (AFE → ADC/ESP32 → BLE → Host).  
 - **Signal Path Overview:** Sensor → Amplifier → Filter → ADC → Wireless → Desktop.  
 - **Requirements:**  
-  - Sampling rate: 250–500 Hz  
-  - Bandwidth: 0.5–200 Hz  
-  - Noise floor target: < x µV RMS  
-  - BLE throughput requirements  
+  - **Amplitude (input):** 10-100 µV_pp (up to ~300 µV_pp)
+  - **Bandwidth:** 0.5-40 Hz (optional extended to 100 Hz)
+  - **Electrode DC offset tolerance:** ±300 mV
+  - **Common-mode tolerance:** ±1.5 V (DRL active)
+  - **Input impedance:** ≥100 MΩ @ 10 Hz
+  - **AFE gain:** Selectable ×200 / ×1000 (INA333: R_G ≈ 503 Ω / 100 Ω)
+  - **Analog HPF:** 0.5 Hz (R=1 MΩ, C=0.33 µF)
+  - **Analog LPF:** 40 Hz (R=10 kΩ, C=0.39 µF), optional 100 Hz (R=10 kΩ, C=0.15–0.16 µF)
+  - **Mains suppression:** Digital 50/60 Hz notch (IIR)
+  - **ADC:** External delta-sigma recommended (ADS1115 16-bit or ADS1299 24-bit)
+  - **Sampling rate:** 500 Hz
+  - **Noise target:** ≤1 µV_rms (0.5–40 Hz), CMRR ≥90 dB
+  - **Safety:** Battery power, USB isolation, input series resistors + TVS
 
 ---
 

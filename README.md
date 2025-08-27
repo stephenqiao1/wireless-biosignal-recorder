@@ -51,14 +51,14 @@ EEG signals are tiny (10-300 µVpp, 0.5-40 Hz), so the instrumentation amplifier
 | Wideband noise | Higher | Lower |
 | Power use | Very low (battery-friendly) | Higher |
 | Use case | Portable, 3.3 V EEG | Lab setup, ±5 V |
-  
-- Filtering stages (high-pass, low-pass, notch).  
-- Gain calculations.  
-- Protection (ESD diodes, ferrite beads, resistors).
 
 ##### Decision
 - **INA333:** chosen for portable, low-power, 3.3 V BLE system
 - **AD620:** useful alternative if using ±5 V bench supplies and prioritizing wideband noise.
+
+- Filtering stages (high-pass, low-pass, notch).  
+- Gain calculations.  
+- Protection (ESD diodes, ferrite beads, resistors).
 
 ### 3.2 PCB Design
 - Layout strategy (analog/digital separation, ground plane).  

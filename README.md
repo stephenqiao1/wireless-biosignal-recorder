@@ -56,7 +56,7 @@ EEG signals are tiny (10-300 µVpp, 0.5-40 Hz), so the instrumentation amplifier
 - **INA333:** chosen for portable, low-power, 3.3 V BLE system
 - **AD620:** useful alternative if using ±5 V bench supplies and prioritizing wideband noise.
 
-### Filtering stages (high-pass, low-pass).
+### Filtering stages (high-pass, low-pass)
 To preserve EEG signals (10–300 µV, 0.5–40 Hz) while protecting the amplifier and ADC, two filters are included:
 
 #### High-Pass Filter (HPF)
@@ -70,8 +70,19 @@ To preserve EEG signals (10–300 µV, 0.5–40 Hz) while protecting the amplifi
 #### Signal Flow 
 Filter: HPF → Buffer → LPF. 
 
-- Gain calculations.  
-- Protection (ESD diodes, ferrite beads, resistors).
+### Gain Design 
+- **Expected input (EEG):** 10–300 µVpp
+- **Target output swing:** 0.3 Vpp
+- **AFE gain:** ×1000 (INA333)  
+- **Gain resistor (R_G):** 100 Ω (1% tolerance)
+
+**Why gain is needed in this application:**
+EEG signals are extremely small (tens of microvolts), far below the resolution of typical ADCs.  
+- Without amplification, the signal would be lost in quantization noise and electrical interference.  
+- Gain stretches these tiny voltages into a range the ADC can measure accurately.  
+- Proper gain also ensures the EEG uses a healthy portion of the ADC’s dynamic range, improving resolution.  
+- Too little gain = poor resolution (signal looks flat and noisy).  
+- Too much gain = clipping on artifacts (flat-topped signals).  
 
 ### 3.2 PCB Design
 - Layout strategy (analog/digital separation, ground plane).  

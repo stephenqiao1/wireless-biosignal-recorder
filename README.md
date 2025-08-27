@@ -31,10 +31,34 @@
 
 ## 3. Hardware Design
 ### 3.1 Analog Front-End (AFE)
-- Instrumentation amplifier choice (e.g., INA333/AD620).  
+- Instrumentation amplifier choice:
+#### Why INA333 (vs AD620) for EEG AFE
+EEG signals are tiny (10-300 µVpp, 0.5-40 Hz), so the instrumentation amplifier must provide high CMRR, low noise, and stable baseline at low frequency.
+
+##### Key Equations
+- **INA333:**
+  $G = 1 + \frac{100kΩ}{R_G}$
+- **AD620:**
+  $G = 1 + \frac{49.4kΩ}{R_G}$
+
+##### Comparison
+| Aspect | INA333 | AD620 |
+|--------|--------|-------|
+| Supply | 2.7–5.5 V, single-supply | ±2.3–18 V (best ±5 V) |
+| Rail-to-rail | Yes | No |
+| Offset & drift | Very low (zero-drift) | Higher |
+| 0.1–10 Hz stability | Excellent | Moderate drift |
+| Wideband noise | Higher | Lower |
+| Power use | Very low (battery-friendly) | Higher |
+| Use case | Portable, 3.3 V EEG | Lab setup, ±5 V |
+  
 - Filtering stages (high-pass, low-pass, notch).  
 - Gain calculations.  
-- Protection (ESD diodes, ferrite beads, resistors).  
+- Protection (ESD diodes, ferrite beads, resistors).
+
+##### Decision
+- **INA333:** chosen for portable, low-power, 3.3 V BLE system
+- **AD620:** useful alternative if using ±5 V bench supplies and prioritizing wideband noise.
 
 ### 3.2 PCB Design
 - Layout strategy (analog/digital separation, ground plane).  

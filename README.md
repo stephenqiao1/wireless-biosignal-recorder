@@ -56,7 +56,20 @@ EEG signals are tiny (10-300 µVpp, 0.5-40 Hz), so the instrumentation amplifier
 - **INA333:** chosen for portable, low-power, 3.3 V BLE system
 - **AD620:** useful alternative if using ±5 V bench supplies and prioritizing wideband noise.
 
-- Filtering stages (high-pass, low-pass, notch).  
+### Filtering stages (high-pass, low-pass).
+To preserve EEG signals (10–300 µV, 0.5–40 Hz) while protecting the amplifier and ADC, two filters are included:
+
+#### High-Pass Filter (HPF)
+- Purpose: remove electode DC offsets and slow baseline drift
+- Cutoff: ~0.5 Hz
+
+#### Low-Pass Filter (LPF, Anti-Alias)
+- Purpose: reject high-frequency noise and prevent aliasing before ADC
+- Cutoff: ~40-100 Hz
+
+#### Signal Flow 
+Filter: HPF → Buffer → LPF. 
+
 - Gain calculations.  
 - Protection (ESD diodes, ferrite beads, resistors).
 
